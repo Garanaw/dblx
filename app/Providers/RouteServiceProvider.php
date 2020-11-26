@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use Closure;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     // protected $namespace = 'App\\Http\\Controllers';
 
+    protected Router $router;
+
+    public function __construct($app)
+    {
+        parent::__construct($app);
+        // Object properties are preferred over facades
+        $this->router = $this->app->make(Router::class);
+    }
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -37,16 +48,17 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+        $this->routes($this->mappedRoutes());
+    }
 
-            Route::middleware('web')
+    protected function mappedRoutes(): Closure
+    {
+        return function () {
+            // At the moment, no API routes are needed
+            $this->router
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-        });
+        };
     }
 
     /**
