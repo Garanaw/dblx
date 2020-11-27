@@ -2,11 +2,11 @@
 
 namespace App\Actions\Content;
 
-use App\Models\Content\Content;
+use App\Models\User;
 use Illuminate\View\Factory as View;
 use Illuminate\Contracts\Support\Renderable;
 
-class ShowContent
+class ListContent
 {
     private View $view;
 
@@ -15,8 +15,10 @@ class ShowContent
         $this->view = $view;
     }
 
-    public function __invoke(Content $content): Renderable
+    public function __invoke(User $user): Renderable
     {
-        return $this->view->make();
+        return $this->view->make('content.index', [
+            'user' => $user->load('content'),
+        ]);
     }
 }

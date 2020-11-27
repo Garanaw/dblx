@@ -2,11 +2,11 @@
 
 namespace App\Actions\Content;
 
-use App\Models\Content\Content;
+use Illuminate\Http\Request;
 use Illuminate\View\Factory as View;
 use Illuminate\Contracts\Support\Renderable;
 
-class ShowContent
+class CreateContent
 {
     private View $view;
 
@@ -15,8 +15,10 @@ class ShowContent
         $this->view = $view;
     }
 
-    public function __invoke(Content $content): Renderable
+    public function __invoke(Request $request): Renderable
     {
-        return $this->view->make();
+        return $this->view->make('content.create', [
+            'user' => $request->user(),
+        ]);
     }
 }

@@ -21,4 +21,12 @@ abstract class Model extends Eloquent
         }
         return parent::resolveRouteBinding($value, $field);
     }
+
+    public function getRenderableId(): ?int
+    {
+        $id = $this->getKey();
+        return $id
+            ? app(Optimus::class)->encode((int)$id)
+            : null;
+    }
 }

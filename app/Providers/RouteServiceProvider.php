@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use Closure;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     // protected $namespace = 'App\\Http\\Controllers';
 
+    private Router $router;
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -35,18 +38,28 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->makeRouter();
         $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+        $this->routes($this->getMappedRoutes());
+    }
 
-            Route::middleware('web')
+    protected function makeRouter(): void
+    {
+        $this->router = $this->app->make(Router::class);
+    }
+
+    protected function getMappedRoutes(): Closure
+    {
+        return function () {
+            $this->router->middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-        });
+
+            $this->router->middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/content.php'));
+        };
     }
 
     /**
@@ -54,7 +67,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
