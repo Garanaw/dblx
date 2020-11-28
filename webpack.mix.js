@@ -11,7 +11,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/content/create/fileUploader.js', 'public/js/content/create/fileUploader.js')
     .postCss('resources/css/app.css', 'public/css/tailwind.css')
     .options({
         postCss: [

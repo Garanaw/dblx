@@ -5,17 +5,16 @@
         </h2>
     </x-slot>
 
+{{--    @dump($errors)--}}
+
     <form
         method="post"
         action="{{ route('content.store', ['user' => $user->getRenderableId()]) }}"
         enctype="multipart/form-data"
-        x-data="createContentForm"
-        @keydown.escape="isDialogOpen = false"
     >
-
+        @csrf
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
-                <button type="button" class="border p-2 bg-white hover:border-gray-500" @click="isDialogOpen = true">Open modal</button>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Applicant Information
                 </h3>
@@ -66,62 +65,100 @@
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Attachments
+                            <button
+                                type="button"
+                                onclick="addNewFileInput()"
+                                class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
+                            >Add Media</button>
+                            <button
+                                type="button"
+                                onclick="addNewUrlInput()"
+                                class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
+                            >Add Media From Url</button>
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                    <div class="w-0 flex-1 flex items-center">
-                                        <x-svg.clip></x-svg.clip>
-                                        <span class="ml-2 flex-1 w-0 truncate">
-                                            resume_back_end_developer.pdf
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                    <div class="w-0 flex-1 flex items-center">
-                                        <x-svg.clip></x-svg.clip>
-                                        <span class="ml-2 flex-1 w-0 truncate">
-                                            coverletter_back_end_developer.pdf
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
+                            <ul class="border border-gray-200 rounded-md divide-y divide-gray-200" id="fileList"></ul>
                         </dd>
                     </div>
                 </dl>
             </div>
         </div>
 
-        {{-- Modal --}}
-        <div
-            class="overflow-auto"
-            style="background-color: rgba(0,0,0,0.5)"
-            x-show="isDialogOpen"
-            :class="{ 'absolute inset-0 z-10 flex items-start justify-center': isDialogOpen }"
-        >
-            <div
-                class="bg-white shadow-2xl m-4 sm:m-8"
-                x-show="isDialogOpen"
-                @click.away="isDialogOpen = false"
+        <div class="m-20">
+            <button
+                type="submit"
+                class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
             >
-                <div class="flex justify-between items-center border-b p-2 text-xl">
-                    <h6 class="text-xl font-bold">Simple modal dialog</h6>
-                    <button type="button" @click="isDialogOpen = false">✖</button>
-                </div>
-                <div class="p-2">
-                    <!-- content -->
-
-                    <select class="rounded">
-                        <option value="yes">Yes</option>
-                        <option value="no">NO</option>
-                    </select>
-                </div>
-            </div>
+                Publish Content
+            </button>
         </div>
 
     </form>
 
-    @push('scripts')
-        <script type="text/javascript" src="{{ mix('js/content/create/fileUploader.js') }}"></script>
-    @endpush
+@push('scripts')
+<script type="text/javascript">
+    const fileList = document.getElementById('fileList');
+
+    function createLiElement() {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'pl-3 pr-4 py-3 flex items-center justify-between text-sm');
+        return li;
+    }
+
+    function createWrapper() {
+        let wrapper = document.createElement('div');
+        wrapper.setAttribute('class', 'w-0 flex-1 flex items-center');
+        return wrapper;
+    }
+
+    function getMediaAttribute() {
+        let index = (parseInt(fileList.children.length) + 1);
+        return 'media[' + index + ']';
+    }
+
+    function createInputElement() {
+        let name = getMediaAttribute();
+        let input = document.createElement('input');
+        input.setAttribute('name', name);
+        input.setAttribute('id', name);
+        return input;
+    }
+
+    function createFileInput() {
+        let input = createInputElement();
+        input.setAttribute('type', 'file');
+        return input;
+    }
+
+    function createUrlInput() {
+        let input = createInputElement();
+        input.setAttribute('type', 'url');
+        input.setAttribute('class', 'mt-1 block w-full rounded border-gray-300 shadow focus:border-gray-900 focus:ring focus:ring-gray-200 focus:ring-opacity-50');
+        return input;
+    }
+
+    function wrapElement(element) {
+        let wrapper = createWrapper();
+        let li = createLiElement();
+        wrapper.append(element);
+        li.append(wrapper);
+
+        return li;
+    }
+
+    function addNewFileInput() {
+        let input = createFileInput();
+        let li = wrapElement(input);
+
+        fileList.append(li);
+    }
+
+    function addNewUrlInput() {
+        let input = createUrlInput();
+        let li = wrapElement(input);
+
+        fileList.append(li);
+    }
+</script>
+@endpush
 </x-app-layout>

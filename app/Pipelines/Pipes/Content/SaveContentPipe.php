@@ -18,9 +18,10 @@ class SaveContentPipe
 
     public function handle(ContentDto $dto, Closure $next): ContentDto
     {
-        $dto->user()->contents()->save($this->prepareContent($dto));
+        $content = $this->prepareContent($dto);
+        $dto->user()->content()->save($content);
 
-        return $next($dto);
+        return $next($dto->setContent($content));
     }
 
     private function prepareContent(ContentDto $dto): Content

@@ -4,6 +4,7 @@ namespace App\Models\Content;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\ForwardsCalls;
 
 class ContentDto
@@ -15,6 +16,7 @@ class ContentDto
     private string $title;
     private string $content;
     private ?string $description;
+    private Collection $media;
 
     public static function make(FormRequest $request): self
     {
@@ -30,7 +32,7 @@ class ContentDto
         $this->title = $data['title'];
         $this->content = $data['content'];
         $this->description = $data['description'] ?? null;
-        $this->model = new Content();
+        $this->media = new Collection($data['media'] ?? null);
     }
 
     public function user(): User
@@ -41,6 +43,12 @@ class ContentDto
     public function content(): Content
     {
         return $this->model;
+    }
+
+    public function setContent(Content $content): self
+    {
+        $this->model = $content;
+        return $this;
     }
 
     public function getTitle(): string
@@ -56,6 +64,16 @@ class ContentDto
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    public function hasMedia(): bool
+    {
+        return $this->media->isNotEmpty();
+    }
+
+    public function getMedia(): Collection
+    {
+        return $this->media;
     }
 
     public function __call($name, $arguments)

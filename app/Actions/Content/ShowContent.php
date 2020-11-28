@@ -17,6 +17,8 @@ class ShowContent
 
     public function __invoke(Content $content): Renderable
     {
-        return $this->view->make();
+        return $this->view->make('content.show', [
+            'content' => $content
+        ]);
     }
 }

@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreContentRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return $this->user() !== null;
-    }
-
     public function rules(): array
     {
         return [
@@ -30,6 +25,10 @@ class StoreContentRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:150',
+            ],
+            'media'       => [
+                'sometimes',
+                'array',
             ],
         ];
     }

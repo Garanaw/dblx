@@ -11,6 +11,20 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Content extends Model implements HasMedia
 {
     use InteractsWithMedia;
+    use RegistersMediaCollections;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'content',
+        'created_by',
+    ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->registerImageCollection();
+        $this->registerVideoCollection();
+    }
 
     public function user(): BelongsTo
     {
