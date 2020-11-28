@@ -5,8 +5,6 @@
         </h2>
     </x-slot>
 
-{{--    @dump($errors)--}}
-
     <form
         method="post"
         action="{{ route('content.store', ['user' => $user->getRenderableId()]) }}"

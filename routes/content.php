@@ -9,7 +9,7 @@ use Illuminate\Routing\Router;
 /** @var Router $router */
 $router = app(Router::class);
 
-$router->get('/{user}/content', ListContent::class)->middleware('auth');
+$router->get('/{user}/content', ListContent::class)->middleware('auth')->name('content.index');
 
 $router->get('/content/{content}', ShowContent::class)->name('content.show');
 

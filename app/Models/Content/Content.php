@@ -10,7 +10,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Content extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia {
+        hasMedia as hasMediaInCollection;
+    }
     use RegistersMediaCollections;
 
     protected $fillable = [
@@ -41,5 +43,10 @@ class Content extends Model implements HasMedia
     {
         $this->attributes['content'] = $content;
         return $this;
+    }
+
+    public function hasMedia(string $collectionMedia = ''): bool
+    {
+        return $this->media->isNotEmpty();
     }
 }

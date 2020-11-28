@@ -9,13 +9,20 @@
     <tbody>
         @foreach($contents as $content)
             <tr>
-                <td>
+                <td class="flex justify-center">
                     @if($content->hasMedia())
                         <x-svg.media></x-svg.media>
                     @endif
                 </td>
                 <td>{{ $content->title }}</td>
-                <td>View</td>
+                <td class="flex justify-center">
+                    <a
+                        href="{{ route('content.show', ['content' => $content->getRenderableId()]) }}"
+                        class="inline-flex items-center justify-center px-4 py-1 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                    >
+                        {{ __('content/index.view') }}
+                    </a>
+                </td>
             </tr>
         @endforeach
     </tbody>

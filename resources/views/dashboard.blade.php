@@ -24,7 +24,7 @@
                         <div class="flex items-center">
                             <x-svg.book></x-svg.book>
                             <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-                                <a href="https://laravel.com/docs">
+                                <a href="{{ route('content.index', ['user' => $user->getRenderableId()]) }}">
                                     {{ __('dashboard.entries.view.title') }}
                                 </a>
                             </div>
@@ -35,7 +35,7 @@
                                 {{ __('dashboard.entries.view.description') }}
                             </div>
 
-                            <a href="https://laravel.com/docs">
+                            <a href="{{ route('content.index', ['user' => $user->getRenderableId()]) }}">
                                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                                     <div>{{ __('dashboard.entries.view.title') }}</div>
 
@@ -51,7 +51,7 @@
                         <div class="flex items-center">
                             <x-svg.camera></x-svg.camera>
                             <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-                                <a href="https://laracasts.com">
+                                <a href="{{ route('content.create', ['user' => $user->getRenderableId()]) }}">
                                     {{ __('dashboard.entries.create.title') }}
                                 </a>
                             </div>
@@ -59,10 +59,10 @@
 
                         <div class="ml-12">
                             <div class="mt-2 text-sm text-gray-500">
-                                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
+                                {{ __('dashboard.entries.create.description') }}
                             </div>
 
-                            <a href="https://laracasts.com">
+                            <a href="{{ route('content.create', ['user' => $user->getRenderableId()]) }}">
                                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                                     <div>{{ __('dashboard.entries.create.title') }}</div>
 
@@ -71,32 +71,6 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200">
-                        <div class="flex items-center">
-                            <x-svg.media></x-svg.media>
-                            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://tailwindcss.com/">Tailwind</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-sm text-gray-500">
-                                Laravel Jetstream is built with Tailwind, an amazing utility first CSS framework that doesn't get in your way. You'll be amazed how easily you can build and maintain fresh, modern designs with this wonderful framework at your fingertips.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 md:border-l">
-                        <div class="flex items-center">
-                            <x-svg.locker></x-svg.locker>
-                            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Authentication</div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-sm text-gray-500">
-                                Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started what matters most: building your application.
-                            </div>
                         </div>
                     </div>
                 </div>

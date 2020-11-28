@@ -11,7 +11,7 @@ return [
         ],
         'create' => [
             'title'       => 'Add new content',
-            'description' => '',
+            'description' => 'In this section you can create new content with or without media items attached to it. It will allow you to securely add long texts so it can be read by people later. Enjoy your writing!',
         ],
     ],
 ];

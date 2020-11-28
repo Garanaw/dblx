@@ -8,6 +8,11 @@ use Spatie\MediaLibrary\MediaCollections\File as MediaFile;
 
 trait RegistersMediaCollections
 {
+    protected array $validMediaCollections = [
+        'images',
+        'videos',
+    ];
+
     protected array $mediaProperties = [
         'accepted_images' => [
             'image/jpg',

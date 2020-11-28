@@ -18,7 +18,7 @@ class ListContent
     public function __invoke(User $user): Renderable
     {
         return $this->view->make('content.index', [
-            'user' => $user->load('content'),
+            'user' => $user->loadMissing('content.media'),
         ]);
     }
 }
