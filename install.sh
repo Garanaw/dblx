@@ -13,7 +13,7 @@ composer install
 echo "Composer packages have been installed"
 
 echo "Now installing Node modules" && sleep 2
-npm install
+npm install && npm run prod
 echo "Node modules have been installed"
 
 echo "Now we will migrate and seed your database" && sleep 2
