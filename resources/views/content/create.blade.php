@@ -12,17 +12,17 @@
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Applicant Information
+                    {{ __('content/create.info_line_1') }}
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Personal details and application.
+                    {{ __('content/create.info_line_2') }}
                 </p>
             </div>
             <div class="border-t border-gray-200">
                 <dl>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 p-5">
                         <dt class="text-sm font-medium text-gray-500">
-                            <label for="title">Title</label>
+                            <label for="title">{{ __('common.title') }}</label>
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 py-5">
                             <input
@@ -60,17 +60,21 @@
 
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Attachments
+                            {{ __('content/create.attachments') }}
                             <button
                                 type="button"
                                 onclick="addNewFileInput()"
-                                class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
-                            >Add Media</button>
+                                class="flex items-center mx-1 my-1 py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
+                            >
+                                {{ __('content/create.add_media') }}
+                            </button>
                             <button
                                 type="button"
                                 onclick="addNewUrlInput()"
-                                class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
-                            >Add Media From Url</button>
+                                class="flex items-center mx-1 py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
+                            >
+                                {{ __('content/create.from_url') }}
+                            </button>
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <ul class="border border-gray-200 rounded-md divide-y divide-gray-200" id="fileList"></ul>
@@ -85,7 +89,7 @@
                 type="submit"
                 class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-gray-500"
             >
-                Publish Content
+                {{ __('content/create.publish') }}
             </button>
         </div>
 
