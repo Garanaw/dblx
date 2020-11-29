@@ -23,7 +23,6 @@
                             </div>
                         </div>
                     </div>
-                    <span class="block">{{ __('dashboard.intro') }}</span>
                 </div>
 
                 <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1">
