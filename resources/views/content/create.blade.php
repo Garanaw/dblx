@@ -35,7 +35,7 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 p-5">
                         <dt class="text-sm font-medium text-gray-500">
-                            <label for="description">Description</label>
+                            <label for="description">{{ __('content/create.description') }}</label>
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 p-2 py-5">
                             <textarea
@@ -47,7 +47,7 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            <label for="content">Content</label>
+                            <label for="content">{{ __('content/create.content') }}</label>
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 h-80">
                             <textarea

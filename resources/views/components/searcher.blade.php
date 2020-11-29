@@ -13,7 +13,7 @@
                 type="submit"
                 class="flex items-center leading-normal bg-grey-lighter rounded rounded-l-none border border-l-0 border-grey-light px-3 whitespace-no-wrap text-grey-dark text-sm"
             >
-                Search Content
+                {{ __('common.search') }}
             </button>
         </div>
     </div>

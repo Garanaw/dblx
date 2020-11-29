@@ -2,6 +2,8 @@
 
 return [
     'title'       => 'Create Content',
+    'content'     => 'Content',
+    'description' => 'Description',
     'info_line_1' => 'Post information',
     'info_line_2' => 'Enter the content for your post',
     'attachments' => 'Attachments',

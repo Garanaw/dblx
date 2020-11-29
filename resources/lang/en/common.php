@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'title'  => 'Title',
+    'title'   => 'Title',
     'actions' => 'Actions',
+    'search'  => 'Search Content',
 ];
