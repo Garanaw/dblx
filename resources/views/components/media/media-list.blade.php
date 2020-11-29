@@ -1,12 +1,14 @@
 
-@dump($medias)
-<div class="flex flex-wrap justify-around">
+<div class="flex flex-wrap justify-around py-2">
     @foreach($medias as $media)
-        <div class="flex">
+        <div class="flex p-3 shadow">
         @if($media->isVideo())
-            Es Video
+            <video src="{{ $media->getUrl() }}" controls></video>
         @elseif($media->isImage())
-            <img src="{{ asset($media->getUrl()) }}">
+            <img
+                src="{{ asset($media->getUrl()) }}"
+                style="max-width: 300px; max-height: 300px"
+            >
         @endif
         </div>
     @endforeach

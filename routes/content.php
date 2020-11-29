@@ -2,6 +2,7 @@
 
 use App\Actions\Content\CreateContent;
 use App\Actions\Content\ListContent;
+use App\Actions\Content\SearchContent;
 use App\Actions\Content\ShowContent;
 use App\Actions\Content\StoreContent;
 use Illuminate\Routing\Router;
@@ -20,3 +21,5 @@ $router->get('/{user}/content/create', CreateContent::class)
 $router->post('/{user}/content/store', StoreContent::class)
     ->middleware('auth:sanctum')
     ->name('content.store');
+
+$router->post('/search', SearchContent::class)->name('content.search');

@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('content/create.title') }}
-        </h2>
+        <x-title :title="__('content/create.title')"></x-title>
     </x-slot>
 
     <form

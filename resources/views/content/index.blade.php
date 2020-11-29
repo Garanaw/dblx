@@ -1,9 +1,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('content/index.title') }}
-        </h2>
+        <x-title :title="__('content/index.title')"></x-title>
     </x-slot>
 
     <div class="py-5">
@@ -30,7 +28,7 @@
 
                 <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1">
                     <div class="flex p-6 w-max justify-center">
-                        <x-content.content-table :content="$user->content"></x-content.content-table>
+                        <x-content.content-table :content="$content"></x-content.content-table>
                     </div>
                 </div>
 

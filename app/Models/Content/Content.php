@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Content extends Model implements HasMedia
+final class Content extends Model implements HasMedia
 {
     use InteractsWithMedia {
         hasMedia as hasMediaInCollection;
@@ -21,6 +21,11 @@ class Content extends Model implements HasMedia
         'content',
         'created_by',
     ];
+
+    public function newEloquentBuilder($query): ContentBuilder
+    {
+        return new ContentBuilder($query);
+    }
 
     public function registerMediaCollections(): void
     {
