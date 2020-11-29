@@ -1,10 +1,20 @@
 <?php declare(strict_types = 1);
 
 use App\Support\Database\Migration;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Collection;
 
 class CreateUsersTable extends Migration
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->seeders = new Collection([
+            UserSeeder::class
+        ]);
+    }
+
     public function up(): void
     {
         $this->schema->create('users', function (Blueprint $table) {
@@ -16,8 +26,6 @@ class CreateUsersTable extends Migration
             $table->text('two_factor_secret')->nullable();
             $table->text('two_factor_recovery_codes')->nullable();
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->text('profile_photo_path')->nullable();
             $table->timestamps();
         });
     }

@@ -40,7 +40,7 @@ class Migrated
 
         $startTime = microtime(true);
 
-        $migration->getSeeders()->each(function (Seeder $abstract) {
+        $migration->getSeeders()->each(function (string $abstract) {
             $name = Str::of($abstract)->explode('/')->last();
             $seeder = app($abstract);
             $this->note("<info>Running seeder</info>: {$name}");
